@@ -1,56 +1,41 @@
-#include <iostream>
-#include <cstdio>
 #include <string.h>
-#include <cmath>
-#include <bitset>
+
+#include <cstdio>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-int main()
-{
+vector<int> charCount(string word) {
+  vector<int> counts(26);
+  for (char c : word) {
+    counts[c - 'a']++;
+  }
+  return counts;
+}
+
+int main() {
   freopen("blocks.in", "r", stdin);
   freopen("blocks.out", "w", stdout);
   int N;
   cin >> N;
 
-  int blocks[26];
-  memset(blocks, 0, sizeof(blocks));
+  vector<int> blocks(26);
   string words[N][2];
-  
-  for (int i = 0; i < N; i++)
-  {
+
+  for (int i = 0; i < N; i++) {
     cin >> words[i][0];
     cin >> words[i][1];
-  }
 
-  for (int i = 0; i < pow(2, N); i++)
-  {
-    std::string binary = bitset<10>(i).to_string();
-    int instance_blocks[26];
-    memset(instance_blocks, 0, sizeof(instance_blocks));
+    vector<int> count1 = charCount(words[i][0]);
+    vector<int> count2 = charCount(words[i][1]);
 
-    for (int j = 0; j < N; j++)
-    {
-      int side = binary.at((10 - N) + j) - '0';
-      string word = words[j][side];
-      
-      for (char c : word)
-      {
-        instance_blocks[c - (int)'a']++;
-      }
-    }
-
-    for (int k = 0; k < 26; k++)
-    {
-      if (instance_blocks[k] > blocks[k])
-      {
-        blocks[k] = instance_blocks[k];
-      }
+    for (int l = 0; l < 26; l++) {
+      blocks[l] += max(count1[l], count2[l]);
     }
   }
 
-  for (int n : blocks)
-  {
+  for (int n : blocks) {
     cout << n << endl;
   }
 
