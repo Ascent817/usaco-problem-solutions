@@ -1,5 +1,4 @@
 #include <string.h>
-
 #include <cstdio>
 #include <iostream>
 #include <vector>
