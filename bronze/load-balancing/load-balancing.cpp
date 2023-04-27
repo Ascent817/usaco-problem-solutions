@@ -21,26 +21,8 @@ int calculateM(int a, int b) {
       count[3]++;
     }
   }
-
-  return max(max(count[0], count[1]), max(count[2], count[3]));
-}
-
-pair<int, int> getNext(int a, int b) {
-  int least = calculateM(a, b);
-  for (int i = a - 2; i < a + 3; i+=2) {
-    for (int j = b - 2; j < b + 3; j+=2) {
-      if (calculateM(a + i, b + j) < least) {
-        pair<int, int> pos;
-        pos.first = a + i;
-        pos.second = b + j;
-        return pos;
-      }
-    }
-  }
-  pair<int, int> pos;
-  pos.first = a + rand() % 3 - 1;
-  pos.second = b + rand() % 3 - 1;
-  return pos;
+  int m = max(max(count[0], count[1]), max(count[2], count[3]));
+  return m;
 }
 
 int main() {
@@ -58,20 +40,14 @@ int main() {
     cin >> cows[i].second;
   }
 
-  bool converged = false;
-  int a = (N - 1) / 2;
-  int b = (N - 1) / 2;
-  int least = calculateM(a, b);
-  vector<int> adj(4);
+  int least = calculateM(1, 1);
 
-  while (!converged) {
-    pair<int, int> next = getNext(a, b);
-    if (calculateM(next.first, next.second) < least) {
-      least = calculateM(next.first, next.second);
-      a = next.first;
-      b = next.second;
-    } else {
-      converged = true;
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      int fence = calculateM(cows[i].first + 1, cows[j].second - 1);
+      if (fence < least) {
+        least = fence;
+      }
     }
   }
 
