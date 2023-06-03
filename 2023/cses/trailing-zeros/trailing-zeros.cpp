@@ -5,7 +5,7 @@ using namespace std;
 int main() {
   int N;
   cin >> N;
-  long zeros = 0;
+  int zeros = 0;
   long long currentPower = 5;
 
   while (N >= currentPower) {
