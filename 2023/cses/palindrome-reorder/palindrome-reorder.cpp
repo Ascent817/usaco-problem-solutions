@@ -5,41 +5,38 @@ using namespace std;
 int main() {
   string original;
   cin >> original;
+  
   string palindrome;
-  char single = ' ';
-  bool found = false;
+  vector<int> counts(26);
+  pair<char, int> middleBlock = {' ', 0};
 
-  sort(original.begin(), original.end());
+  for (char c : original) {
+    counts[((int)c) - 65]++;
+  }
 
-  while (original.length() > 0) {
-    found = false;
-    char target = original.at(0);
-
-    for (int i = 1; i < original.length(); i++) {
-      if (original.at(i) == target) {
-        original.replace(0, 1, ""s);
-        original.replace(i - 1, 1, ""s);
-        palindrome.insert(0, 1, target);
-        palindrome.insert(palindrome.length(), 1, target);
-        found = true;
-        break;
+  for (int i = 0; i < 26; i++) {
+    if (counts[i] % 2 == 0) {
+      if (counts[i] != 0) {
+        palindrome.append(string(counts[i] / 2, (char)(i + 65)));
       }
-    }
-
-    if (!found) {
-      if (single == ' ') {
-        single = target;
-        original.replace(0, 1, ""s);
-      } else {
+    } else {
+      if (middleBlock.first != ' ') {
         cout << "NO SOLUTION\n";
         return 0;
+      } else {
+        middleBlock = {(char)(i + 65), counts[i]};
+        counts[i] = 0;
       }
     }
   }
 
-  if (single != ' ') {
-    palindrome.insert(palindrome.length() / 2, 1, single);
+  palindrome.append(string(middleBlock.second, middleBlock.first));
+
+  for (int i = 25; i >= 0; i--) {
+    if (counts[i] != 0) {
+      palindrome.append(string(counts[i] / 2, (char)(i + 65)));
+    }
   }
 
-  cout << palindrome << endl;
+  cout << palindrome;
 }
