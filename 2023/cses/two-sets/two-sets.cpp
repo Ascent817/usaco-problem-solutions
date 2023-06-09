@@ -6,16 +6,16 @@ int main() {
   int N;
   cin >> N;
 
-  int target = (int)(((float)N / 2) * (N + 1));
-  int partialSum = target / 2;
-  set<int> set1;
+  long long target = (((double)N / 2) * (N + 1));
+  long long partialSum = target / 2;
+  set<long long> set1;
 
   if (target % 2 != 0) {
     cout << "NO" << endl;
     return 0;
   }
 
-  int sum = 0;
+  long long sum = 0;
 
   for (int i = N; i > 0; i--) {
     if (sum < partialSum) {
@@ -27,7 +27,6 @@ int main() {
         sum += partialSum - sum;
       }
     } else {
-
       cout << "YES" << endl;
       cout << set1.size() << endl;
 
@@ -47,4 +46,6 @@ int main() {
       return 0;
     }
   }
+
+  cout << "NO" << endl;
 }
