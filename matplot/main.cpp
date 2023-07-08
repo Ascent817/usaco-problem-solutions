@@ -25,7 +25,7 @@ int main() {
     cin >> arr[i];
   }
 
-  int graphSteps = 100;
+  int graphSteps = 200;
   for (int i = 0; i < graphSteps; i++) {
     cout << msum(i) << "\n";
   }
