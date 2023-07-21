@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <numeric>
 #define fi first
 #define se second
 #define all(x) (x).begin(), (x).end()
@@ -6,10 +7,10 @@ typedef long long ll;
 
 using namespace std;
 
-int A, B, C, D;
+ll A, B, C, D;
 
-int filter(ll F) {
-  int R, L;
+ll filter(ll F) {
+  ll R, L;
 
   if (A % F == 0) {
     L = A;
@@ -34,10 +35,11 @@ int filter(ll F) {
 int main() {
   cin >> A >> B >> C >> D;
 
-  int n = (B - A) + 1;
+  ll n = (B - A) + 1;
 
   n -= filter(C);
   n -= filter(D);
+  n += filter((C * D) / __gcd(C, D));
   
-  cout << n;
+  cout << endl << n;
 }
