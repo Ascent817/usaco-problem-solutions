@@ -6,23 +6,27 @@ typedef long long ll;
 
 using namespace std;
 
+const int MOD = 1000000007;
+
 int main() {
   int N;
   cin >> N;
 
-  vector<int> arr(N);
-  long double sum = 0;
+  vector<ll> arr(N);
+  ll sum = 0;
 
   for (int i = 0; i < N; i++) {
     cin >> arr[i];
     sum += arr[i];
   }
 
-  sum *= sum / 2;
+  ll answer = 0;
 
   for (int i = 0; i < N; i++) {
-    sum -= (long double)(arr[i] * arr[i]) / 2;
+    sum -= arr[i];
+    answer += arr[i] * (sum % MOD);
+    answer = answer % MOD;
   }
 
-  cout << sum;
+  cout << answer;
 }
