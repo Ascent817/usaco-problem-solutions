@@ -9,37 +9,24 @@ using namespace std;
 
 ll A, B, C, D;
 
-ll filter(ll F) {
-  ll R, L;
-
-  if (A % F == 0) {
-    L = A;
-  } else {
-    L = A + (F - (F % A));
+ll gcd(ll a, ll b) {
+  if (b == 0) {
+    return a;
   }
-
-  if (B % F == 0) {
-    R = B;
-  } else {
-    R = B - (B % F);
-  }
-
-  if (L > B || R < A) {
-    return 0;
-  }
-
-  return (R - L) / F + 1;
+  return gcd(b, a % b);
 }
 
+ll lcm(ll a, ll b) {
+  return (a / gcd(a, b)) * b;
+}
 
 int main() {
   cin >> A >> B >> C >> D;
 
-  ll n = (B - A) + 1;
-
-  n -= filter(C);
-  n -= filter(D);
-  n += filter((C * D) / __gcd(C, D));
+  ll m = B;
+  ll a = m - m / C - m / D + m / lcm(C, D);
+  m = A - 1;
+  ll b = m - m / C - m / D + m / lcm(C, D);
   
-  cout << endl << n;
+  cout << a - b;
 }
