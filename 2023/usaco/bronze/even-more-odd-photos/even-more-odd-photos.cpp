@@ -20,36 +20,47 @@ int main() {
 
   for (int i = 0; i < N; i++) {
     if (i % 2 == 0) {
-      for (int j = i; j < N; j++) {
+      int found = 0;
+      for (int j = 0; j < N; j++) {
         if (ids[j] == 0) {
           ids[j] = -1;
+          found++;
           groups++;
           break;
         }
       }
 
-      int found = 0;
-      for (int j = i; j < N; j++) {
+      if (found == 1) {
+        continue;
+      }
+
+      found = 0;
+      for (int j = 0; j < N; j++) {
         if (ids[j] == 1) {
           found++;
           ids[j] = -1;
         }
 
-        if (found > 1) {
+        if (found == 2) {
           groups++;
           break;
         }
       }
+
+      if (found == 1) {
+        cout << groups << "\n";
+        return 0;
+      }
     } else {
       int found = 0;
-      for (int j = i; j < N; j++) {
+      for (int j = 0; j < N; j++) {
         if (ids[j] == 1) {
           found++;
         }
       }
 
       if (found == 2) {
-        cout << groups << endl;
+        cout << groups << "\n";
         return 0;
       }
 
@@ -58,7 +69,7 @@ int main() {
         return 0;
       }
 
-      for (int j = i; j < N; j++) {
+      for (int j = 0; j < N; j++) {
         if (ids[j] == 1) {
           ids[j] = -1;
           groups++;
