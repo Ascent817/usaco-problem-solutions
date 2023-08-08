@@ -75,5 +75,6 @@
     "valarray": "cpp",
     "variant": "cpp"
   },
-  "cmake.sourceDirectory": "${workspaceFolder}/matplot"
+  "cmake.sourceDirectory": "${workspaceFolder}/matplot",
+  "cmake.configureOnOpen": false
 }
