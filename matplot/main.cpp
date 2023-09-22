@@ -6,27 +6,18 @@ typedef long long ll;
 
 using namespace std;
 
-int N;
-vector<int> arr;
-
-int msum(int m) {
-  int sm = 0;
-  for (int i = 0; i < N; i++) {
-    sm += m % arr[i];
-  }
-  return sm;
+ll FUNCTION(int x) {
+  int A, B;
+  A = 10;
+  B = 7;
+  
+  ll y = A * x + B * int(log10(x) + 1);
+  return y;
 }
 
 int main() {
-  cin >> N;
-
-  arr.resize(N);
-  for (int i = 0; i < N; i++) {
-    cin >> arr[i];
-  }
-
-  int graphSteps = 200;
-  for (int i = 0; i < graphSteps; i++) {
-    cout << msum(i) << "\n";
+  int graphSteps = 2000;
+  for (int i = 1; i <= graphSteps; i++) {
+    cout << FUNCTION(i) << "\n";
   }
 }
